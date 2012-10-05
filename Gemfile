@@ -25,6 +25,10 @@ gem 'jquery-rails'
 gem 'rgeo'
 gem 'activerecord-postgis-adapter'
 
+group :development do
+  gem 'quiet_assets'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
