@@ -18,4 +18,6 @@ ActiveRecord::Schema.define(:version => 20120816081310) do
     t.spatial "location", :limit => {:srid=>4326, :type=>"point", :geographic=>true}
   end
 
+  add_index "checkins", ["location"], :name => "index_checkins_on_location", :spatial => true
+
 end

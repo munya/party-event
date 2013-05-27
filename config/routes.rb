@@ -1,4 +1,8 @@
 PartyEvent::Application.routes.draw do
+  resources :users
+
+  resources :cars
+
   resources :checkins
 
   # The priority is based upon order of creation:
