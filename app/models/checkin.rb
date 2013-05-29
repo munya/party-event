@@ -1,5 +1,6 @@
 class Checkin < ActiveRecord::Base
   attr_accessible :location, :title, :latitude, :longitude
+  belongs_to :car
 
   scope :nearby_to,
         lambda { |checkin, max_distance|

@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+
+u1 = Driver.create(login: '000', name: 'Oleg')
+u1.cars.create(car_model: 'Honda')
+u2 = Driver.create(login: '111', name: 'Denis')
+u2.cars.create(car_model: 'Mazda')
+u3 = Driver.create(login: '222', name: 'Sasha')
+u3.cars.create(car_model: 'Opel')
+

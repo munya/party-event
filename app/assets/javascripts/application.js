@@ -27,3 +27,25 @@ function findMe() {
         alert('Your browser doesn\'t support geolocation.');
     }
 }
+
+function updateCheckin() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude.toFixed(3);
+            var longitude = position.coords.longitude.toFixed(3);
+            if ($.cookie('checkin_latitude') != latitude || $.cookie('checkin_longitude') != longitude) {
+                $.cookie('checkin_latitude', latitude);
+                $.cookie('checkin_longitude', longitude);
+                $.post("/cars/2/checkins",  { checkin: {"title": "Honda", "latitude": latitude, "longitude": longitude}},
+                    /* The callback that will get executed once the data is back from the server*/
+                    function (dataFromTheBackEnd) {
+//                        $(".debug-display").html(dataFromTheBackEnd);
+                    });
+            }
+        }, function() {
+            alert('We couldn\'t find your position.');
+        });
+    } else {
+        alert('Your browser doesn\'t support geolocation.');
+    }
+}

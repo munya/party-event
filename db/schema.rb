@@ -11,13 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816081310) do
+ActiveRecord::Schema.define(:version => 20130529142241) do
+
+  create_table "cars", :force => true do |t|
+    t.string   "car_model"
+    t.string   "number"
+    t.string   "color"
+    t.integer  "driver_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "checkins", :force => true do |t|
     t.string  "title"
     t.spatial "location", :limit => {:srid=>4326, :type=>"point", :geographic=>true}
+    t.integer "car_id",                                                               :null => false
   end
 
-  add_index "checkins", ["location"], :name => "index_checkins_on_location", :spatial => true
+  create_table "users", :force => true do |t|
+    t.integer  "login"
+    t.string   "password"
+    t.string   "name"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

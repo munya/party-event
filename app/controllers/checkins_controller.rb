@@ -1,8 +1,10 @@
 class CheckinsController < ApplicationController
+  before_filter :find_car
+
   # GET /checkins
   # GET /checkins.json
   def index
-    @checkins = Checkin.all
+    @checkins = @car.checkins
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +15,7 @@ class CheckinsController < ApplicationController
   # GET /checkins/1
   # GET /checkins/1.json
   def show
-    @checkin = Checkin.find(params[:id])
+    @checkin = @car.checkins.find(params[:id])
 
     @nearby_checkins = Checkin.nearby_to(@checkin, 1000)
 
@@ -36,13 +38,13 @@ class CheckinsController < ApplicationController
 
   # GET /checkins/1/edit
   def edit
-    @checkin = Checkin.find(params[:id])
+    @checkin = @car.checkins.find(params[:id])
   end
 
   # POST /checkins
   # POST /checkins.json
   def create
-    @checkin = Checkin.new(params[:checkin])
+    @checkin = @car.checkins.build(params[:checkin])
 
     if @checkin.valid?
       puts '---controller'
@@ -63,7 +65,7 @@ class CheckinsController < ApplicationController
   # PUT /checkins/1
   # PUT /checkins/1.json
   def update
-    @checkin = Checkin.find(params[:id])
+    @checkin = @car.checkins.find(params[:id])
 
     respond_to do |format|
       if @checkin.update_attributes(params[:checkin])
@@ -79,12 +81,18 @@ class CheckinsController < ApplicationController
   # DELETE /checkins/1
   # DELETE /checkins/1.json
   def destroy
-    @checkin = Checkin.find(params[:id])
+    @checkin = @car.checkins.find(params[:id])
     @checkin.destroy
 
     respond_to do |format|
       format.html { redirect_to checkins_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def find_car
+    @car = Car.find(params[:car_id])
   end
 end
